@@ -10,10 +10,35 @@ re3 = re.compile(
 
 # Process file for information
 ext = ['.html', '.shtml', '/']
+
+a2c_dict = {"0": "零", "1": "一", "2": "贰", "3": "三", "4": "四",
+            "5": "五", "6": "六", "7": "七", "8": "八", "9": "九"}
+
+
+def arb2chinese(line):
+    outLine = ""
+    for ch in line:
+        if ch in a2c_dict.keys():
+            outLine += a2c_dict.get(ch)
+        else:
+            outLine += ch
+    return outLine
+
+
+punctuation = '！,，；：？“、”。《》%（）.〔〕'
+
+
+def removePunctuation(text):
+    text = re.sub(r'[{}]+'.format(punctuation), '', text)
+    return text.strip().lower()
+
+
 with open(r'C:\Users\cmcc\Desktop\dj_pa\out.txt', 'rt', encoding="utf-8") as f:
     lines = f.read()
     line = lines.strip()
     temStr = re2.findall(lines)
     for i in temStr:
         if len(i) > 20:
-            print(i)
+            no_sym = removePunctuation(i)
+            target = arb2chinese(no_sym)
+            print(target)
