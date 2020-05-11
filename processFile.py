@@ -10,18 +10,10 @@ re3 = re.compile(
 
 # Process file for information
 ext = ['.html', '.shtml', '/']
-for line in open(r'C:\Users\cmcc\Desktop\dj_pa\out.txt', 'rt', encoding="utf-8").readlines():
-    line = line.strip()
-    if line == []:
-        continue
-    line = re2.findall(line)
-    if len(line) > 1:
-        print(line)
-    # Used for check  search urls
-    # tempURL = re2.findall(line)
-    # if tempURL == []:
-    #     continue
-    # for i in range(len(tempURL)):
-    #     if "12371" in str(tempURL[i]).split("."):
-    #         if tempURL[i].endswith(tuple(ext)):
-    #             print(tempURL[i])
+with open(r'C:\Users\cmcc\Desktop\dj_pa\out.txt', 'rt', encoding="utf-8") as f:
+    lines = f.read()
+    line = lines.strip()
+    temStr = re2.findall(lines)
+    for i in temStr:
+        if len(i) > 20:
+            print(i)
